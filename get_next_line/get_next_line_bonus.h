@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eulker <eulker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 20:38:12 by eulker            #+#    #+#             */
-/*   Updated: 2022/02/10 20:47:59 by eulker           ###   ########.fr       */
+/*   Created: 2022/02/16 13:45:09 by eulker            #+#    #+#             */
+/*   Updated: 2022/02/16 13:45:11 by eulker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-static char	*ft_strcpy(char *dst, const char *src)
-{
-	size_t	i;
+# include <stdlib.h>
 
-	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	while (*src)
-		dst[i++] = *((char *)src++);
-	dst[i] = '\0';
-	return (dst);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
-char	*ft_strdup(const char *s)
-{
-	char	*ret;
+char	*get_next_line(int fd);
+char	*ft_read_to_left_str(int fd, char *left_str);
+char	*ft_strchr(char *s, int c);
+size_t	ft_strlen(char *s);
+char	*ft_strjoin(char *left_str, char *buff);
+char	*ft_get_line(char *left_str);
+char	*ft_new_left_str(char *left_str);
 
-	ret = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (ret)
-		ft_strcpy(ret, s);
-	return (ret);
-}
+#endif
