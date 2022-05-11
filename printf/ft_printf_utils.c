@@ -1,36 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eulker <eulker@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/10 20:38:12 by eulker            #+#    #+#             */
-/*   Updated: 2022/02/10 20:47:59 by eulker           ###   ########.fr       */
+/*   Created: 2022/02/24 23:02:08 by eulker            #+#    #+#             */
+/*   Updated: 2022/02/24 23:02:09 by eulker           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static char	*ft_strcpy(char *dst, const char *src)
+void	ft_putstr(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (!dst && !src)
-		return (NULL);
-	while (*src)
-		dst[i++] = *((char *)src++);
-	dst[i] = '\0';
-	return (dst);
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
 }
 
-char	*ft_strdup(const char *s)
+int	ft_printstr(char *s)
 {
-	char	*ret;
+	int	i;
 
-	ret = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (ret)
-		ft_strcpy(ret, s);
-	return (ret);
+	i = 0;
+	if (!s)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
+	while (s[i])
+	{
+		write(1, &s[i], 1);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_printnbr(int n)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	if (n == 0)
+		return (write(1, "0", 1));
+	s = ft_itoa(n);
+	i = ft_printstr(s);
+	free(s);
+	return (i);
 }
